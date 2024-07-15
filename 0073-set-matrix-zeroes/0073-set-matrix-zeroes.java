@@ -10,8 +10,8 @@ class Solution {
             {
                 if(matrix[i][j]==0)
                 {
-                    rows[i]=-1;
-                    cols[j]=-1;
+                    rows[i]=1;
+                    cols[j]=1;
                 }
             }
         }
@@ -19,7 +19,7 @@ class Solution {
             {
                 for(int j=0;j<m;j++)
                 {
-                    if(rows[i]==-1 || cols[j]==-1)
+                    if(rows[i]==1 || cols[j]==1)
                     {
                         matrix[i][j]=0;
                     }
