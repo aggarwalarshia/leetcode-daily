@@ -1,13 +1,18 @@
 class Solution {
+    public void swap(char[] s,int i,int j)
+    {
+        char temp=s[i];
+        s[i]=s[j];
+        s[j]=temp;
+    }
     public void reverseString(char[] s) {
-        char[] str=new char[s.length];
-        for(int i=0;i<s.length;i++)
+        int left=0;
+        int right=s.length-1;
+        while(left<=right)
         {
-            str[i]=s[s.length-i-1];
-        }
-        for(int i=0;i<str.length;i++)
-        {
-            s[i]=str[i];
+            swap(s,left,right);
+            left++;
+            right--;
         }
     }
 }
