@@ -2,22 +2,33 @@ class Solution {
     public int numTeams(int[] rating) {
         int n=rating.length;
         int count=0;
-        for(int i=0;i<n-2;i++)
+        for(int mid=1;mid<n-1;mid++)
         {
-            for(int j=i+1;j<n-1;j++)
+            int leftSmallerCount=0;
+            for(int i=0;i<mid;i++)
             {
-                for(int k=j+1;k<n;k++)
+                if(rating[i]<rating[mid])
                 {
-                    if(rating[i]<rating[j] && rating[j]<rating[k])
-                    {
-                        count++;
-                    }
-                    if(rating[i]>rating[j] && rating[j]>rating[k])
-                    {
-                        count++;
-                    }
+                    leftSmallerCount++;
                 }
             }
+            
+            int rightGreaterCount=0;
+            for(int i=mid+1;i<n;i++)
+            {
+                if(rating[i]>rating[mid])
+                {
+                    rightGreaterCount++;
+                }
+            }
+            // increase
+            count+=leftSmallerCount*rightGreaterCount;
+            
+            int leftGreaterCount = mid - leftSmallerCount;
+            int rightSmallerCount = n - mid - 1 - rightGreaterCount;
+            
+            // decrease
+            count+=leftGreaterCount*rightSmallerCount;
         }
         return count;
     }
