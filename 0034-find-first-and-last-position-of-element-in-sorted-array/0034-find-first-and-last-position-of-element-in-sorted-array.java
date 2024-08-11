@@ -1,17 +1,47 @@
 class Solution {
-    public int[] searchRange(int[] nums, int target) {
-        int[] ans=new int[2];
-        ans[0]=-1;
-        ans[1]=-1;
-        for(int i=0;i<nums.length;i++)
+    public int lowerBound(int[] nums,int n,int x)
+    {
+        int low=0;
+        int high=nums.length-1;
+        int ans=nums.length;
+        while(low<=high)
         {
-            if(nums[i]==target)
+            int mid=low+(high-low)/2;
+            if(nums[mid]>=x)
             {
-                if(ans[0]==-1) ans[0]=i;
-                else ans[1]=i;
+                ans=mid;
+                high=mid-1;
             }
-            if(ans[1]==-1) ans[1]=ans[0];
+            else
+            {
+                low=mid+1;
+            }
         }
         return ans;
+    }
+    public int upperBound(int[] nums,int n,int x)
+    {
+        int low=0;
+        int high=nums.length-1;
+        int ans=n;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(nums[mid]>x)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        int lb= lowerBound(nums,nums.length,target);
+        if(lb==nums.length || nums[lb]!=target) return new int[]{-1,-1};
+        return new int[]{lb,upperBound(nums,nums.length,target)-1};
     }
 }
