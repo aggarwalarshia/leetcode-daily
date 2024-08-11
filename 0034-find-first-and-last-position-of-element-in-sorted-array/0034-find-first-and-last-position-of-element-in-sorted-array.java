@@ -7,17 +7,10 @@ class Solution {
         {
             if(nums[i]==target)
             {
-                ans[0]=i;
-                break;
+                if(ans[0]==-1) ans[0]=i;
+                else ans[1]=i;
             }
-        }
-        for(int i=nums.length-1;i>=0;i--)
-        {
-            if(nums[i]==target)
-            {
-                ans[1]=i;
-                break;
-            }
+            if(ans[1]==-1) ans[1]=ans[0];
         }
         return ans;
     }
